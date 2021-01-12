@@ -1,0 +1,209 @@
+<'''
+Diagram of a Connect 4 playing field board
+# - - - - - - -  0
+#| | | | | | | | 1
+# - - - - - - -  2
+#| | | | | | | | 3
+# - - - - - - -  4
+#| | | | | | | | 5
+# - - - - - - -  6
+#| | | | | | | | 7
+# - - - - - - -  8
+#| | | | | | | | 9
+# - - - - - - -  10
+#| | | | | | | | 11
+# - - - - - - -  12
+#012345678911234
+#          0
+'''
+
+'''
+The code below is for drawing an 7*6 "Connect 4" playing board.
+By setting "boxes"=7, the code prints out 7 columns wide.
+By setting height to 18/7, the playing field is 6 rows high. 
+'''
+
+### Defining functions ###
+#Function for printing the playing field 
+boxes = 7
+boxes_high = 12/7
+length = (boxes*2)
+height = int(boxes*boxes_high)
+horizontal = " -"
+def draw_field(board):
+    for n in range(height+1):                   #range(13)
+        if n%2 !=0:                             #1,3,5,7,9,11
+            global field
+            field=int(n/2)                      # field = 0,1,2,3,4,5
+            for y in range(length+1):           #range(15)
+                if y%2 !=0:                     #1,3,5,7,9,11,13
+                    global field1
+                    field1=int(y/2)             # field1 = 0,1,2,3,4,5,6
+                    if y !=length:              # for y =  0-13
+                        print(board[field][field1], end="")
+                    else:
+                        print(board[field][field1])
+                else:
+                    print("|", end="")
+            else:
+                print()
+        else:
+            print(horizontal*boxes)
+
+# Function for printing current field
+def print_field():
+    print(current_field)
+    draw_field(current_field)
+
+# Function to check win
+def check_win_x(current_field):        
+    chit = "X"
+    # check vertical spaces
+    for y in range(field):
+        for x in range(field1-3):
+            if current_field[x][y] == chit and current_field[x+1][y] == chit and current_field[x+2][y] == chit and current_field[x+3][y] == chit:
+                print (player1 + " wins")
+                return True
+            
+    # check horizontal spaces
+    for x in range(field1):
+        for y in range(field-3):
+            if current_field[x][y] == chit and current_field[x][y+1] == chit and current_field[x][y+2] == chit and current_field[x][y+3] == chit:
+                print (player1 + " wins")
+                return True 
+
+    # check / (left to right) diagonal spaces
+    for x in range(field1-3):
+        for y in range(3,field):
+            if current_field[x][y] == chit and current_field[x+1][y-1] == chit and current_field[x+2][y-2] == chit and current_field[x+3][y-3] == chit:
+                print (player1 + " wins")
+                return True
+
+    # check \ (right to left) diagonal spaces
+    for x in range(field1-3):
+        for y in range(field-3):
+            if current_field[x][y] == chit and current_field[x+1][y+1] == chit and current_field[x+2][y+2] == chit and current_field[x+3][y+3] == chit:
+                print (player1 + " wins")
+                return True
+                break
+
+    return False
+
+def check_win_o(current_field):        
+    chit = "O"
+    # check vertical spaces
+    for y in range(field):
+        for x in range(field1-3):
+            if current_field[x][y] == chit and current_field[x+1][y] == chit and current_field[x+2][y] == chit and current_field[x+3][y] == chit:
+                print (player2 + " wins")
+                return(True)
+        
+    # check horizontal spaces
+    for x in range(field1):
+        for y in range(field-3):
+            if current_field[x][y] == chit and current_field[x][y+1] == chit and current_field[x][y+2] == chit and current_field[x][y+3] == chit:
+                print (player2 + " wins")
+                return(True)
+
+    # check / (left to right) diagonal spaces
+    for x in range(field1-3):
+        for y in range(3,field):
+            if current_field[x][y] == chit and current_field[x+1][y-1] == chit and current_field[x+2][y-2] == chit and current_field[x+3][y-3] == chit:
+                print (player2 + " wins")
+                return(True)
+
+    # check \ (right to left) diagonal spaces
+    for x in range(field1-3):
+        for y in range(field-3):
+            if current_field[x][y] == chit and current_field[x+1][y+1] == chit and current_field[x+2][y+2] == chit and current_field[x+3][y+3] == chit:
+                print (player2 + " wins")
+                return(True)
+
+    return(False)
+
+
+
+## Setting playing field lists 
+current_field = []
+for i in range(6):                                  # produces a 6x7 playing field (6 rows/ 7 columns)
+    current_field.append([" "]*7)
+#print(current_field)
+draw_field(current_field)
+
+
+## Welcome messages
+print("Welcome to Connect 4!")
+player1 = input("Please enter your name, Player 1:\n")
+player2 = input("Please enter your name, Player 2:\n")
+
+## Coding for the game 
+player = player1 # keeps track of players turn
+while(True):
+    print("Players turn:",str(player))
+    move_col = int(input("Please enter the column you wish to place your next piece\n"))
+    if player ==player1:                            # when player 1 
+        if (current_field[5][move_col-1]==" "):     # will place the chip in the bottom row (index 5), if blank
+            current_field[5][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        elif (current_field[4][move_col-1]==" "):   # if not blank, then it will place it in the next row (index 4)
+            current_field[4][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        elif (current_field[3][move_col-1]==" "):   # if not blank, will place the selection in the next row (index 3)
+            current_field[3][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        elif (current_field[2][move_col-1]==" "):   # if not blank, will place the selection in the next row (index 2)
+            current_field[2][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        elif (current_field[1][move_col-1]==" "):   # if not blank, will place the selection in the next row (index 1)
+            current_field[1][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        elif (current_field[0][move_col-1]==" "):   # if not blank, will place the selection in the next row (index 0)
+            current_field[0][move_col-1]="X"
+            print_field()
+            check_win_x(current_field)
+            player = player2
+        else:
+            print("Column is full - please try again")
+    elif player ==player2:
+        if (current_field[5][move_col-1]==" "):
+            current_field[5][move_col-1]="O"
+            print_field()
+            check_win_o(current_field)
+            player = player1
+        elif (current_field[4][move_col-1]==" "):
+            current_field[4][move_col-1]="O"
+            print_field()
+            check_win_o(current_field)
+            player = player1
+        elif (current_field[3][move_col-1]==" "):
+            current_field[3][move_col-1]="O"
+            print_field()
+            check_win_o(current_field)
+            player = player1
+        elif (current_field[2][move_col-1]==" "):
+            current_field[2][move_col-1]="O"
+            print_field()
+            check_win_o(current_field)
+            player = player1
+        elif (current_field[1][move_col-1]==" "):
+            current_field[1][move_col-1]="O"
+            print_field()
+            check_win_o(current_field)
+            player = player1
+        elif (current_field[0][move_col-1]==" "):   # if not blank, will place the selection in the next row (index 0)
+            current_field[0][move_col-1]="X"
+            print_field()
+            check_win_o(current_field)
+            player = player1            
+        else:
+            print("Column is full - please try again")
