@@ -1,0 +1,210 @@
+'''
+Diagram of Hang man 
+
+  01234567891
+            0
+0 _________ 
+1  |     | 
+2  |     0
+3  |   --o--
+4  |    / |
+5  |   -  -
+6 _|_
+
+'''
+
+def gallows():
+    for i in range(7):
+        if i >0 and i<6:
+            print(" |")
+        elif i==0:
+            print(" _________")
+        else:
+            print("_|_")
+    return
+
+def rope():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i>1 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return
+
+def head():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i>2 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return
+
+def body():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |     o")
+        elif i>3 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return
+
+def left_arm():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o")
+        elif i>3 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return
+
+def right_arm():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i>3 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return  
+
+def left_leg():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    /")
+        elif i>4 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return  
+
+def right_leg():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    / |")
+        elif i>4 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return  
+    
+def right_leg():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    / |")
+        elif i>4 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return  
+    
+def right_leg():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    / |")
+        elif i>4 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return  
+
+def left_foot():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    / |")
+        elif i==5:
+            print(" |   -")
+        elif i>5 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return 
+    
+def right_foot():
+    for i in range(7):
+        if i==0:
+            print(" _________")
+        elif i==1:
+            print(" |     |")
+        elif i==2:
+            print(" |     0")
+        elif i==3:
+            print(" |   --o--")
+        elif i==4:
+            print(" |    / |")
+        elif i==5:
+            print(" |   -   -")
+        elif i>5 and i<6:
+            print(" |")
+        else:
+            print("_|_")
+    return 
