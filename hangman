@@ -1,0 +1,128 @@
+'''
+Code for Hangman word guessing game  
+'''
+
+#import libraries and files 
+from random import randint
+from time import sleep
+from getpass import getpass
+import draw_hangman
+
+rand_val = randint(1,10)
+##print(rand_val)
+
+'''
+##Printing playing field
+'''
+
+def print_dashes():     #print dashes in place of word
+    global output
+    output = ["_ "]*len(secret_word)
+    print(output)
+
+'''
+Game play functions
+'''
+
+def player_turn():       #Who goes first function
+    global guess
+    global not_guess
+    guess = 0
+    print("To determine who goes first, players must correctly guess a random number between 1 and 10")
+    while (True):
+        guess1 = int(input(str(player1)+", what is your best guess: "))
+        if guess1 == rand_val:
+            
+            guess = player1
+            not_guess = player2
+            break
+        else:
+            print("Your guess is incorrect")
+        guess2 = int(input(str(player2) + " what is your best guess: "))
+        if guess2 == rand_val:
+            guess = player2
+            not_guess = player1
+            break
+        else:
+            print("Your guess is incorrect")
+    if guess == player1:
+        print("Congratulations ", str(player1),"...It's your turn")
+    else:
+        print("Congratulations ", str(player2),"...It's your turn")       
+    global secret_word
+    secret_word =getpass(prompt = "Please enter you word: ")  # Choosing a word
+    sleep(3)
+
+def start_game():       # Starting game function
+    print("\n Lets get started ",not_guess)
+    print("\n",guess," has picked a "+ str(len(secret_word))+" word")
+    print_dashes()
+    draw_hangman.gallows()
+    print()
+    game_play()
+
+def print_output():     #Print output function
+    print()
+    print(''.join([i+' ' for i in output]))
+
+def game_play():        #Game play with "check for win" function
+    no_of_guesses = 0
+    list_of_guesses = []
+    correct_guesses = 0
+    while(no_of_guesses != 9):
+        print_output()
+        print()
+        l = input(not_guess+" Please enter a letter: ")
+        if l.lower() in secret_word.lower():
+            print("Good guess! ",l," is in the word!")
+            for i,x in enumerate(secret_word):
+                if x is l:
+                    output[i] = l
+            list_of_guesses.append(l)
+            correct_guesses +=1
+            print("Letters guessed so far: ",list_of_guesses)
+            print()
+        else:
+            print("Sorry, but ",l," is not in the word.")
+            no_of_guesses += 1
+            print(no_of_guesses, "wrong guesses.")
+            list_of_guesses.append(l)
+            print("Letters guessed so far: ",list_of_guesses)  
+            if no_of_guesses == 1:
+                draw_hangman.rope()
+            elif no_of_guesses == 2:
+                draw_hangman.head()
+            elif no_of_guesses == 3:
+                draw_hangman.body()
+            elif no_of_guesses == 4:
+                draw_hangman.left_arm()
+            elif no_of_guesses == 5:
+                draw_hangman.right_arm()
+            elif no_of_guesses == 6:
+                draw_hangman.left_leg()
+            elif no_of_guesses == 7:
+                draw_hangman.right_leg()
+            elif no_of_guesses == 8:
+                draw_hangman.left_foot()
+            elif no_of_guesses == 9:
+                draw_hangman.right_foot()
+                break
+        if "_ " not in output:
+            print("Congratulations ",not_guess," You win with a correct guess of ",secret_word)
+            sleep(5)
+            print()
+            begin_play()
+    print("You lost the game!")
+    sleep(5)
+    print()
+    begin_play()
+    
+def begin_play():       # Begin play function, which allows loop back to restart new game
+    global player1
+    global player2
+    player1 = input("Player 1, Please enter your name: \n")
+    player2 = input("\nPlayer 2, Please enter your name: \n")
+    player_turn()
+    start_game()
+
+begin_play()
